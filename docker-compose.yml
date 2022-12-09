@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  mysql:
+    profiles:
+      - middleware
+    image: mysql:8
+    networks:
+    - nextauth-test
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: nextauth_test 
+      MYSQL_PASSWORD: nextauth_test
+      MYSQL_DATABASE: nextauth_test
+    volumes:
+    - ./mysql/conf.d:/etc/mysql/conf.d
+    - ./mysql/data:/var/lib/mysql
+    ports:
+    - "13306:3306"
+
+networks:
+  nextauth-test: {}
