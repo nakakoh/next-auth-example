@@ -1,7 +1,7 @@
-import { useSession, signIn, signOut } from 'next-auth/react'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useSession, signIn, signOut } from "next-auth/react";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -12,9 +12,10 @@ export default function Home() {
     return (
       <>
         Signed in as {session.user?.name} <br />
+        Role: {session.user?.role} <br />
         <button onClick={() => signOut()}>Sign out</button>
       </>
-    )
+    );
   }
 
   return (
@@ -22,5 +23,5 @@ export default function Home() {
       Not signed in <br />
       <button onClick={() => signIn()}>Sign in</button>
     </>
-  )
+  );
 }
