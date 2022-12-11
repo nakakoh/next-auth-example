@@ -1,9 +1,7 @@
-import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { randomBytes, randomUUID } from "crypto";
-import { PrismaClient, Session, User } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from "../../../lib/prismadb";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -21,13 +19,12 @@ export const authOptions: NextAuthOptions = {
       console.log(user, account, profile, email, credentials);
       return true;
     },
-    async session({ session, token, user}: any) {
+    async session({ session, user}) {
       console.log("session", session);
       console.log("user", user);
-      if (user?.role) {
+      if (session?.user && user?.role) {
         session.user.role = user.role;
       }
-      console.log("role", session.user.role)
       return session;
     },
   },
