@@ -8,11 +8,9 @@ generator client {
 }
 
 enum Role {
-  NONE     // 権限なし
-  ADMIN    // 管理者
-  SUPPORT  // サポート
-  ENGINEER // エンジニア
-  AUDITOR  // 監査
+  NONE
+  ADMIN
+  AUDITOR
 }
 
 model Account {
